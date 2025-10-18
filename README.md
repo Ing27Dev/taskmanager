@@ -9,10 +9,10 @@ Un gestor de tareas inteligente que utiliza IA para desglosar tareas complejas e
   - 📋 Listar tareas
   - ✔️ Marcar tareas como completadas
   - 🗑️ Eliminar tareas
-- 🤖 Integración con IA:
+  - 🤖 Integración con IA:
   - Desglose automático de tareas complejas en 3-5 subtareas
   - Utiliza OpenAI GPT para análisis inteligente
-- 💾 Persistencia de datos:
+  - 💾 Persistencia de datos:
   - Guardado automático en archivo JSON
   - Carga del estado previo al iniciar
 

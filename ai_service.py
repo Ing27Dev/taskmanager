@@ -1,12 +1,28 @@
+"""
+Servicio de IA para desglosar tareas complejas en subtareas más simples.
+Utiliza OpenAI GPT para generar sugerencias de subtareas.
+"""
+
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
 
+# Cargar variables de entorno desde .env
 load_dotenv()
 
+# Cliente global de OpenAI (se mockea en los tests)
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def create_simple_tasks(description):
+    """
+    Desglosa una tarea compleja en 3-5 subtareas más simples usando IA.
+    
+    Args:
+        description (str): Descripción de la tarea compleja
+        
+    Returns:
+        list[str]: Lista de subtareas o lista con un mensaje de error
+    """
     if not client.api_key:
         return ["Error: OpenAI API key is not configured."]
     

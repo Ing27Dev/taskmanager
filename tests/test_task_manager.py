@@ -1,3 +1,8 @@
+"""
+Tests unitarios para el módulo task_manager.
+Verifica la funcionalidad CRUD de tareas y la persistencia en JSON.
+"""
+
 import json
 import os
 import tempfile
@@ -9,6 +14,10 @@ from task_manager import TaskManager, Task
 
 @pytest.fixture(autouse=True)
 def use_temp_tasks_file(monkeypatch, tmp_path):
+    """
+    Fixture que configura un archivo temporal para tasks.json.
+    Se ejecuta automáticamente antes de cada test.
+    """
     # Use a temporary tasks.json in the tmp_path to avoid touching real files
     temp_file = tmp_path / "tasks.json"
     monkeypatch.setattr(TaskManager, 'FILENAME', str(temp_file))
@@ -16,6 +25,9 @@ def use_temp_tasks_file(monkeypatch, tmp_path):
 
 
 def test_add_and_list_and_save(monkeypatch, capsys):
+    """
+    Prueba añadir una tarea, listarla y verificar que se guarda correctamente.
+    """
     manager = TaskManager()
     manager.add_task("Probar tarea")
 
@@ -32,6 +44,9 @@ def test_add_and_list_and_save(monkeypatch, capsys):
 
 
 def test_complete_task(capsys):
+    """
+    Prueba marcar una tarea como completada y verifica el estado en el archivo.
+    """
     manager = TaskManager()
     manager.add_task("Tarea a completar")
     manager.complet_task(1)
@@ -45,6 +60,9 @@ def test_complete_task(capsys):
 
 
 def test_delete_task(capsys):
+    """
+    Prueba eliminar una tarea y verifica que se elimina del archivo.
+    """
     manager = TaskManager()
     manager.add_task("Tarea a eliminar")
     manager.delete_task(1)
@@ -58,6 +76,9 @@ def test_delete_task(capsys):
 
 
 def test_load_initial_next_id(monkeypatch, tmp_path):
+    """
+    Verifica que el próximo ID se calcula correctamente al cargar tareas existentes.
+    """
     # create a file with existing tasks to test next_id increment
     temp_file = tmp_path / "tasks.json"
     content = [
@@ -72,6 +93,10 @@ def test_load_initial_next_id(monkeypatch, tmp_path):
 
 
 def test_str_task():
+    """
+    Prueba la representación en string de una tarea.
+    Verifica que incluye ID, descripción y marca de completado.
+    """
     t = Task(5, "Descripción", completed=True)
     s = str(t)
     assert "#5" in s and "Descripción" in s and "✔" in s

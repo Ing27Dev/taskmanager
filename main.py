@@ -1,7 +1,15 @@
+"""
+Punto de entrada principal del Gestor de Tareas Inteligente.
+Proporciona una interfaz de línea de comandos para gestionar tareas.
+"""
+
 from task_manager import TaskManager
 from ai_service import create_simple_tasks
 
 def print_menu():
+        """
+        Muestra el menú principal de la aplicación con todas las opciones disponibles.
+        """
         print("\n---Gestor de Tareas Inteligente")
         print("1. Añadir tarea")
         print("2. Añadir tarea compleja (con IA)")
@@ -11,7 +19,10 @@ def print_menu():
         print("6. Salir")
 
 def main():
-
+    """
+    Función principal que ejecuta el bucle de la aplicación.
+    Maneja la interacción con el usuario y las operaciones sobre tareas.
+    """
     manager = TaskManager()
 
     while True:
